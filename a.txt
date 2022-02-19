@@ -1,0 +1,35 @@
+
+
+virtualenv --system-site-packages /home/ai.solicitous.cloud/public_html
+source /home/ai.solicitous.cloud/public_html/bin/activate
+
+cd /home/aipet.solicitous.cloud/public_html
+
+
+source /home/aipet.solicitous.cloud/public_html/bin/activate
+
+
+context / {
+  type                    appserver
+  location                /home/ai.solicitous.cloud/public_html/AI_Project
+  binPath                 /usr/local/lsws/fcgi-bin/lswsgi
+  appType                 wsgi
+  startupFile             AI_Project/wsgi.py
+  envType                 1
+  env                     LS_PYTHONBIN=/home/ai.solicitous.cloud/public_html/bin/pyhton
+  env                     PYTHONHOME=/home/ai.solicitous.cloud/public_html/
+}
+
+STATIC_URL = '/static/'
+STATIC_ROOT = '/home/ai.solicitous.cloud/public_html/static'
+
+
+virtualenv --system-site-packages /home/aipet.solicitous.cloud/public_html
+source /home/aipet.solicitous.cloud/public_html/bin/activate
+
+git clone https://github.com/davisking/dlib.git
+cd dlib
+mkdir build; cd build; cmake .. -DDLIB_USE_CUDA=0 -DUSE_AVX_INSTRUCTIONS=1; cmake --build .
+cd ..
+python setup.py install --yes USE_AVX_INSTRUCTIONS --no DLIB_USE_CUDA
+pip install face_recognition
